@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.juancruzfrini.mercadopago2'
+    compileSdk 33
+
+    // Excluir el archivo 'META-INF/DEPENDENCIES' de las dependencias
+    packagingOptions {
+        exclude 'META-INF/*'
+        exclude 'jetified-org.*'
+    }
+
+    defaultConfig {
+        applicationId "com.juancruzfrini.mercadopago2"
+        minSdk 21
+        targetSdk 33
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding true
+    }
+}
+
+def lifecycle_version = "2.6.1"
+
+dependencies {
+    //Mp
+    implementation 'com.mercadopago.android.px:checkout:4.53.2'
+    //Genera problema de duplicate classes
+    //implementation 'com.mercadopago:sdk-java:2.1.11'
+    //No funciona (Failed to resolve: com.mercadopago:sdk:3.8.1)
+    //implementation 'com.mercadopago:sdk:3.8.1'
+
+    //Moshi
+    implementation "com.squareup.moshi:moshi-kotlin:1.9.3"
+    // Retrofit with Moshi Converter
+    implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    //ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    //viewModels()
+    implementation "androidx.fragment:fragment-ktx:1.6.1"
+
+    // Play services coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.6.4'
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}

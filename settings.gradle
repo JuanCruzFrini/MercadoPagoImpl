@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            setUrl("https://artifacts.mercadolibre.com/repository/android-releases/")
+
+        }
+        maven {
+            //funcionan todos a la fecha
+            //url("https://mvnrepository.com/artifact/com.mercadopago/sdk-java")
+            /*url("https://github.com/mercadopago/sdk-java")*/
+            url("https://github.com/mercadopago/sdk-java/blob/master/pom.xml")
+        }
+    }
+}
+rootProject.name = "Mercado Pago 2"
+include ':app'
